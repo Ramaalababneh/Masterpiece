@@ -43,15 +43,29 @@ class ItemController extends Controller
             'price' => $request->price,
             'stock_quantity' => $request->stock_quantity,
             'size' => $request->size,
+            'category_id' => $request->category_id,
+
         ]);
 
-        return redirect('items')->with('flash_message', 'Item Added!');
+        return redirect('item')->with('flash_message', 'Item Added!');
         }
 
-    public function show($id)
-    {
-        //
+        // show single itme in the webiste 
+public function show($category_id)
+{
+    $item = Item::where('category_id', $category_id)->first();
+
+    if ($item) {
+        return view('website.pages.singleItem.index', compact('item'));
+    } else {
+        // Handle the case where no item is found for the given category_id.
+        return view('website.pages.singleItem.index')->with('error', 'Item not found');
     }
+}
+
+
+    //return view('website.pages.shop.index', compact('items', 'category'));
+
 
     public function edit($id)
     {
@@ -67,6 +81,7 @@ class ItemController extends Controller
         $data['price'] = $request->price;
         $data['stock_quantity'] = $request->stock_quantity;
         $data['size'] = $request->size;
+        $data['category_id'] = $request->category_id;
 
         $filename = '';
 

@@ -13,9 +13,12 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+public function index()
     {
-        //
+        // Fetch reviews with related user and order information
+        $data = Review::with(['users', 'orders'])->get();
+
+        return view('dashboard.pages.reviews.index', compact('data'));
     }
 
     /**
@@ -79,8 +82,10 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy($id)
     {
-        //
+    Review::destroy($id);
+    return redirect('review')->with('flash_message','Category deleted!');
+
     }
 }

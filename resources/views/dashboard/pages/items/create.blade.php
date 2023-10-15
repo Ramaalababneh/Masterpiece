@@ -39,6 +39,12 @@
                             </div>
 
                             <div class="mb-3">
+                                <label>Category ID</label><br>
+                                <input type="text" name="category_id" id="category_id" class="form-control">
+                                <span>@error('category_id'){{$message}} @enderror</span><br><br>
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="image">Upload Image:</label>
                                 <input type="file" id="image" name="image" accept="image/*" ><br>
                                 <span>@error('image'){{$message}} @enderror</span><br><br>

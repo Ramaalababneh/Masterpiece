@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Item;
 class CategoryController extends Controller
 {
     public function index()
@@ -38,9 +39,10 @@ class CategoryController extends Controller
         return redirect('category')->with('flash_message', 'Category Added!');
         }
 
-    public function show($id)
+    public function show()
     {
-        //
+        $category = Category::all();
+        return  view('website.pages.home.index', compact(['category']));
     }
 
     public function edit($id)
@@ -70,6 +72,24 @@ class CategoryController extends Controller
         return redirect('category')->with('flash_message','Category Update!');
 
     }
+public function showItemsByCategory($id)
+{
+    //dd($id);
+    $category = Category::find($id);
+
+    if (!$category) {
+        // Handle the case where the category does not exist.
+    }
+
+    $items = Item::where('category_id', $id)->get();
+    //dd($items);
+
+    return view('website.pages.shop.index', compact('items', 'category'));
+}
+
+
+
+
 
     public function destroy($id)
     {

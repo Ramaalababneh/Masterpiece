@@ -8,6 +8,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 // ______________________
 
 // Route::get('/', function () {
@@ -31,6 +32,11 @@ Route::resource('/item'   , ItemController::class);
 
 Route::resource('/order'   , OrderController::class);
 
+Route::resource('/review'   , ReviewController::class);
+
+//Route::get('/review', 'ReviewController@index');
+
+
 
 // //adminlogin
 // Route::get('/user', [UserController::class, 'index']);
@@ -42,6 +48,20 @@ Route::resource('/order'   , OrderController::class);
 // Route::get('/adminLogout', [AdminLoginController::class, 'adminLogout'])->name('adminLogout');
 // Route::get('/dash', [AdminLoginController::class, 'adminLogout']);
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard.pages.users.index');
 });
+
+
+
+// Route::get('/', function () {
+//     return view('website.pages.home.index');
+// });
+
+route::get('/', [CategoryController::class,'show'])->name('home');
+route::get('/categoryHome/{id}', [CategoryController::class,'showItemsByCategory'])->name('category');
+// Route::get('/category/{id}', 'CategoryController@showItemsByCategory')->name('category.items');
+//Route::get('/item/{category_id}', 'ItemController@showSingleItem');
+//Route::get('/item/{category_id}', 'ItemController@showSingleItem')->name('single-item');
+Route::get('/item/{category_id}', 'ItemController@show')->name('single-item');
+

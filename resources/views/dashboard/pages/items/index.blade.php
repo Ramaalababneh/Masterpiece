@@ -14,6 +14,7 @@
                                 <th scope="col">Price</th>
                                 <th scope="col">Stock Quantity</th>        
                                 <th scope="col">Size</th> 
+                                <th scope="col">Category ID</th>
                                 <th scope="col">Action</th>                               
                             </tr>
                         </thead>
@@ -34,6 +35,7 @@
                     <td>{{ $item->price }}</td>
                     <td>{{ $item->stock_quantity }}</td>
                     <td>{{ $item->size }}</td>
+                    <td>{{ $item->category_id }}</td>
                     <td>
                     <a href="{{ url('/item/' . $item->id  . '/edit' ) }}" > <button class="btn btn-warning btn-sm">Edit</button></a>
                     
