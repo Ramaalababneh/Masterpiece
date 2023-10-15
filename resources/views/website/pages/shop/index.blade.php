@@ -63,15 +63,13 @@
                     <span>{{ $item->category->name }}</span>
                 </div>
             </div>
-            <div class="product__item__text">
-                <h6><a href="#">{{ $item->name }}</a></h6>
-                <div class="product__item__price">{{ $item->price }}</div>
-                <div class="cart_add">
-                    <a href="{{ route('single-item', ['category_id' => $item->category_id]) }}">Add to cart</a>
-                    {{-- <a href="{{ route('single-item', ['category_id' => $item->category_id]) }}" class="primary-btn" style="background-color: #FDB827;">View Item</a> --}}
-
-                </div>
-            </div>
+          <div class="product__item__text">
+    <h6><a href="#">{{ $item->name }}</a></h6>
+    <div class="product__item__price">{{ $item->price }}</div>
+    <div class="cart_add">
+        <a href="{{ route('single-item', ['id' => $item->id, 'category_id' => $item->category_id]) }}">Add to cart</a>
+    </div>
+</div>
         </div>
     @endforeach
 </div>

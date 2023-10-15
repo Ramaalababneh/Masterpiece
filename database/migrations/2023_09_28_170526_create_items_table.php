@@ -12,10 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->mediumText('image');
+            $table->mediumText('logo');
             $table->string('description');
             $table->string('price');
             $table->string('stock_quantity');
-            $table->string('size');
+            $table->string('size');      
             $table->rememberToken();
             $table->timestamps();
 

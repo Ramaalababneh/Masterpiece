@@ -63,5 +63,8 @@ route::get('/categoryHome/{id}', [CategoryController::class,'showItemsByCategory
 // Route::get('/category/{id}', 'CategoryController@showItemsByCategory')->name('category.items');
 //Route::get('/item/{category_id}', 'ItemController@showSingleItem');
 //Route::get('/item/{category_id}', 'ItemController@showSingleItem')->name('single-item');
-Route::get('/item/{category_id}', 'ItemController@show')->name('single-item');
+Route::get('/item/{id}/{category_id}', [ItemController::class,'show'])->name('single-item');
+
+Route::get('items/{itemId}/related', 'ItemController@showRelatedItems')->name('items.showRelatedItems');
+
 
