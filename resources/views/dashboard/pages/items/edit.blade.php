@@ -36,6 +36,11 @@
                                 <input type="text" name="size" value="{{ $data->size }}" id="size" class="form-control">
                             </div>
 
+                            <div class="mb-3">
+                                <label for="size">category_id</label>
+                                <input type="text" name="category_id" value="{{ $data->category_id }}" id="category_id" class="form-control">
+                            </div>
+
                             {{-- <div class="mb-3">
                                 <label for="size">Category Name</label>
                                 <input type="text" name="size" value="{{ $data->size }}" id="size" class="form-control">

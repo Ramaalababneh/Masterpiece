@@ -53,7 +53,7 @@
                         </div>
                         <a href="{{ url('/shopping-cart') }}" class="primary-btn" style="background-color: #FDB827;">Add to cart</a>
                         <a href="{{ url('/shopping-cart') }}" class="heart__btn"><span class="icon_heart_alt"></span></a>
-                    </div>
+                        </div>
                 </div>
                 @else
                 <p>Item not found for the selected category.</p>
@@ -62,20 +62,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             </div>

@@ -72,20 +72,43 @@ class CategoryController extends Controller
         return redirect('category')->with('flash_message','Category Update!');
 
     }
+// public function showItemsByCategory($id)
+// {
+//     //dd($id);
+//     $category = Category::find($id);
+
+//     if (!$category) {
+//         // Handle the case where the category does not exist.
+//     }
+
+//     $items = Item::where('category_id', $id)->get();
+//     //dd($items);
+
+//     return view('website.pages.shop.index', compact('items', 'category'));
+// }
+
+
 public function showItemsByCategory($id)
 {
-    //dd($id);
-    $category = Category::find($id);
+    // Uncomment this line to debug and ensure you have the correct $id
+    // dd($id);
 
-    if (!$category) {
-        // Handle the case where the category does not exist.
+    // Find the subcategory by its ID
+    $subcategory = Category::find($id);
+
+    if (!$subcategory) {
+        // Handle the case where the subcategory does not exist.
     }
 
-    $items = Item::where('category_id', $id)->get();
-    //dd($items);
+    // Get items associated with the subcategory
+    $items = $subcategory->items;
 
-    return view('website.pages.shop.index', compact('items', 'category'));
+    // Uncomment this line to debug and check if you are getting the expected items
+    // dd($items);
+
+    return view('website.pages.shop.index', compact('items', 'subcategory'));
 }
+
 
 
 

@@ -54,7 +54,7 @@ class ItemController extends Controller
 public function show($id,$category_id)
 {
     $item = Item::where('id', $id)->first();
-  $relatedItems = Item::where('category_id', $category_id)
+    $relatedItems = Item::where('category_id', $category_id)
                     ->where('id', '!=', $id) // Exclude the current item
                     ->limit(5) // You can limit the number of related items to display
                     ->get();
@@ -66,6 +66,22 @@ public function show($id,$category_id)
         return view('website.pages.singleItem.index')->with('error', 'Item not found');
     }
 }
+
+// public function show($id)
+// {
+//     $item = Item::where('id', $id)->first();
+//   $relatedItems = Item::where('category_id', $item-> category_id)
+//                     ->where('id', '!=', $id) // Exclude the current item
+//                     ->limit(5) // You can limit the number of related items to display
+//                     ->get();
+//                 //    dd($relatedItems);
+//     if ($item) {
+//         return view('website.pages.singleItem.index', compact('item','relatedItems'));
+//     } else {
+//         // Handle the case where no item is found for the given category_id.
+//         return view('website.pages.singleItem.index')->with('error', 'Item not found');
+//     }
+// }
 
 
 public function showRelatedItems($itemId) {

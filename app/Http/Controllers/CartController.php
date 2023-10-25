@@ -5,14 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function addToCart(Request $request, $item_id)
+{
+    if (Auth::check()) {
+        // User is logged in, store item in the database
+        $user = Auth::user();
+        $cart = new Cart();
+        $cart->user_id = $user->id;
+        $cart->item_id = $item_id;
+        // Set other cart properties (quantity, total, item_price, etc.)
+        $cart->save();
+    } else {
+        // User is not logged in, store item in the session
+        $cartItems = session()->get('cart', []);
+        // Add the item to the session cart
+        $cartItems[] = $item_id;
+        session()->put('cart', $cartItems);
+    }
+
+    return redirect()->route('cart.show'); // Redirect to cart page
+}
+
+
+
     public function index()
     {
         //

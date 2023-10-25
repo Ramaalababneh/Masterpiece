@@ -63,7 +63,7 @@
                     <span>{{ $item->category->name }}</span>
                 </div>
             </div>
-          <div class="product__item__text">
+        <div class="product__item__text">
     <h6><a href="#">{{ $item->name }}</a></h6>
     <div class="product__item__price">{{ $item->price }}</div>
     <div class="cart_add">
