@@ -17,7 +17,7 @@
                         <div class="card__content">
                             <h6>{{ $item->name }}</h6>
                             {{-- <button>Shop Now</button> --}}
-                            <a href="{{ route('category', ['id' => $item->id]) }}">Shop Now</a>
+                        <button style="color: #FDB827;"> <a style="color: #ffffff;" href="{{ route('category', ['id' => $item->id]) }}">Shop Now</a></button>
                         </div>
                     </div>
                 </div>

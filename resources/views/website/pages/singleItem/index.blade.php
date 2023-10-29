@@ -51,8 +51,9 @@
                                 <input type="text" value="2">
                             </div>
                         </div>
-                        <a href="{{ url('/shopping-cart') }}" class="primary-btn" style="background-color: #FDB827;">Add to cart</a>
-                        <a href="{{ url('/shopping-cart') }}" class="heart__btn"><span class="icon_heart_alt"></span></a>
+
+                        <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827;">Add to cart</a>
+                        {{-- <a href="{{ route('cart', ['id' => $item->id]) }}" class="heart__btn"><span class="icon_heart_alt"></span></a> --}}
                         </div>
                 </div>
                 @else

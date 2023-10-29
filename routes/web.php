@@ -10,6 +10,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -75,9 +77,9 @@ Route::resource('/review'   , ReviewController::class);
 // Route::get('/adminLogout', [AdminLoginController::class, 'adminLogout'])->name('adminLogout');
 // Route::get('/dash', [AdminLoginController::class, 'adminLogout']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard.pages.users.index');
-});
+// Route::get('/dashboard', function () {
+//     return view('dashboard.pages.users.index');
+// });
 
 
 
@@ -93,6 +95,17 @@ route::get('/categoryHome/{id}', [CategoryController::class,'showItemsByCategory
 Route::get('/item/{id}/{category_id}', [ItemController::class,'show'])->name('single-item');
 
 Route::get('items/{itemId}/related', 'ItemController@showRelatedItems')->name('items.showRelatedItems');
+
+// ======================= Cart routes 
+Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('addtocart');
+Route::post('/quantitycart/{id}/{type}', [CartController::class, 'quantitycart'])->name('quantitycart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/deletecart/{item}', [CartController::class, 'destroy'])->name('deletecart');
+Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout');
+Route::post('/checkoutcreate', [CartController::class, 'create'])->middleware(['auth', 'verified'])->name('checkoutcreate');
+
+// ======================= End Cart routes 
+
 
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Item;
+use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     public function index()
@@ -106,7 +107,11 @@ public function showItemsByCategory($id)
     // Uncomment this line to debug and check if you are getting the expected items
     // dd($items);
 
+
+    //dd(Auth::id());
     return view('website.pages.shop.index', compact('items', 'subcategory'));
+
+
 }
 
 
