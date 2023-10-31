@@ -36,7 +36,7 @@
                 @if (isset($item))
                 <div class="product__details__text">
                     <h4>{{ $item->name }}</h4>
-                    <h5>{{ $item->price }}</h5>
+                    <h5>{{ $item->price }} JOD</h5>
                     <p>{{ $item->description }}</p>
                     <ul>
                         <li>Logo: <span>Price includes the logo</span></li>
@@ -53,7 +53,6 @@
                         </div>
 
                         <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827;">Add to cart</a>
-                        {{-- <a href="{{ route('cart', ['id' => $item->id]) }}" class="heart__btn"><span class="icon_heart_alt"></span></a> --}}
                         </div>
                 </div>
                 @else

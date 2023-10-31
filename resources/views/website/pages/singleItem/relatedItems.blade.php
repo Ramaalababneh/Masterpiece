@@ -12,7 +12,7 @@
                 @foreach ($relatedItems as $relatedItem)
                     <div class="col-lg-3">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/' . $relatedItem->image) }}">
+                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/shirts' . $relatedItem->image) }}">
                                 <div class="product__label">
                                     <span>{{ $relatedItem->category->name }}</span>
                                 </div>

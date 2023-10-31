@@ -55,26 +55,25 @@
             </div>
 
             <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-            @foreach ($items as $item)
-            <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="{{ asset($item->image) }}">
-                <div class="product__label">
-                    <span>{{ $item->category->name }}</span>
+                @foreach ($items as $item)
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="{{ asset($item->image) }}">
+                            <div class="product__label">
+                                <span>{{ $item->category->name }}</span>
+                            </div>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">{{ $item->name }}</a></h6>
+                            <div class="product__item__price">{{ $item->price }}</div>
+                            <div class="cart_add">
+                                <a href="{{ route('single-item', ['id' => $item->id, 'category_id' => $item->category_id]) }}">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                @endforeach
             </div>
-        <div class="product__item__text">
-    <h6><a href="#">{{ $item->name }}</a></h6>
-    <div class="product__item__price">{{ $item->price }}</div>
-    <div class="cart_add">
-        <a href="{{ route('single-item', ['id' => $item->id, 'category_id' => $item->category_id]) }}">Add to cart</a>
-    </div>
-</div>
-        </div>
-    @endforeach
-</div>
-</div>
-
             
             <div class="shop__last__option">
                 <div class="row">
