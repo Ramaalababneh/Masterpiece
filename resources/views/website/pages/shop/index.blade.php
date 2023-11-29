@@ -11,8 +11,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <span>Shop</span>
+                        <a href="/">Home</a>
                     </div>
                 </div>
             </div>
@@ -27,28 +26,13 @@
                 <div class="row">
                     <div class="col-lg-7 col-md-7">
                         <div class="shop__option__search">
-                            <form action="#">
+                            {{-- <form action="#"> --}}
                                 <select>
                                     <option value="">Shirts</option>
                                     <option value="">Hoodies</option>
                                     <option value="">Labcoats</option>
                                     <option value="">Scrubs</option>
                                 </select>
-                                <input type="text" placeholder="Search">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-5">
-                        <div class="shop__option__right">
-                            <select>
-                                <option value="">Default sorting</option>
-                                <option value="">A to Z</option>
-                                <option value="">1 - 8</option>
-                                <option value="">Name</option>
-                            </select>
-                            <a href="#"><i class="fa fa-list"></i></a>
-                            <a href="#"><i class="fa fa-reorder"></i></a>
                         </div>
                     </div>
                 </div>
@@ -64,10 +48,10 @@
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">{{ $item->name }}</a></h6>
-                            <div class="product__item__price">{{ $item->price }}</div>
+                            <h6>{{ $item->name }}</h6>
+                            <div class="product__item__price">{{ $item->price }} JD</div>
                             <div class="cart_add">
-                                <a href="{{ route('single-item', ['id' => $item->id, 'category_id' => $item->category_id]) }}">Add to cart</a>
+                                <a href="{{ route('single-item', ['id' => $item->id, 'category_id' => $item->category_id]) }}">Details</a>
                             </div>
                         </div>
                     </div>

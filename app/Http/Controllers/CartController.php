@@ -140,6 +140,7 @@ class CartController extends Controller
     
 
     }
+
     public function store($id)
     {
         $item=Item::find($id);
@@ -167,8 +168,9 @@ Session::put('cart', $cart);
 // Redirect back to the previous page
 return redirect()->back();
         }
-        else{
-            $cart = Session::get('cart', []);
+        else if(Auth::id()){
+           $cart = Session::get('cart', []);  
+           if($cart){
             $user = Auth::id();
             if (isset($cart[$id])) {
                 foreach ($cart as $item) {
@@ -181,8 +183,30 @@ return redirect()->back();
                 ]);
         }
         session()->forget('cart');
+        }
+   
     }
-        return redirect()->back();
+    else{
+    $item = Item::find($id);
+    $cart= Cart::where('item_id', $id)->first();
+    if(!$cart){
+    Cart::create([
+    'user_id' => Auth::id(),
+    'item_id' => $id,
+    'item_price' => $item->price, // Use -> to access object properties
+    'image' => $item->image, // Use -> to access object properties
+    'quantity' => 1, // Use -> to access object properties
+    'total' =>  $item->price, // Use -> to access object properties
+]);}
+else
+{
+  $cart->update([
+        'quantity' => $cart->quantity + 1,
+        'total'=> $cart->quantity * $item->price
+    ]);
+} 
+
+    }
     }
         // $item = Item::findOrFail($id);
         // if (!Auth::id()) {
@@ -237,7 +261,7 @@ return redirect()->back();
 
         //     }
         // }
-        // return redirect()->back();
+         return redirect()->back();
     }
     public function quantitycart($id, $type)
     {

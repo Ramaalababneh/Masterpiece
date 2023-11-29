@@ -10,19 +10,21 @@
 
             <!-- categorie cards -->
             <div class="row">
-                @foreach ($category as $item)
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card">
-                        <div class="card__image" style="background-image: url('{{ asset($item->image) }}'); background-size: 80% 80%; background-repeat: no-repeat;"></div>
-                        <div class="card__content">
-                            <h6>{{ $item->name }}</h6>
-                            {{-- <button>Shop Now</button> --}}
-                        <button style="color: #FDB827;"> <a style="color: #ffffff;" href="{{ route('category', ['id' => $item->id]) }}">Shop Now</a></button>
-                        </div>
-                    </div>
+    @foreach ($category as $item)
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card">
+                <div class="card__image" style="background-image: url('{{ asset($item->image) }}'); background-size: 80% 80%; background-repeat: no-repeat;"></div>
+                <div class="card__content">
+                    <h6>{{ $item->name }}</h6>
+                    <button  style="background-color: #FDB827; border: none; padding: 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; color: #ffffff;">
+                        <a style="text-decoration: none; color: #ffffff;" href="{{ route('category', ['id' => $item->id]) }}">Shop Now</a>
+                    </button>
                 </div>
-                @endforeach
             </div>
+        </div>
+    @endforeach
+</div>
+
 
 </section>
 </section>

@@ -106,6 +106,13 @@ Route::post('/checkoutcreate', [CartController::class, 'create'])->middleware(['
 
 // ======================= End Cart routes 
 
+Route::get('/about', function () {
+    return view('website.pages.about.index');
+});
+
+Route::get('/contact', function () {
+    return view('website.pages.contact.index');
+});
 
 
 require __DIR__.'/auth.php';

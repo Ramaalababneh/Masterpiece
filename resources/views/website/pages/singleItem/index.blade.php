@@ -9,13 +9,6 @@
                         <h2>Product detail</h2>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <a href="./shop.html">Shop</a>
-                        <span>Basic Black shirt </span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -43,16 +36,16 @@
                         <li>Category: <span>{{ $item->category->name }}</span></li>
                         <li>Size: <span>{{ $item->size }}</span></li>
                     </ul>
-                    <button class="primary-btn" style="background-color: #FDB827; margin right: 10px; width: 400px; border-color:#FDB827;">Upload your logo</button>
+                    <button class="primary-btn" style="background-color: #FDB827; margin right: 10px; width: 400px; border-color:#FDB827; text-decoration: none;">Upload your logo</button>
                     <br> <br>
                     <div class="product__details__option">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="text" value="2">
+                                <input type="text" value="1">
                             </div>
                         </div>
 
-                        <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827;">Add to cart</a>
+                        <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827; text-decoration: none;">Add to cart</a>
                         </div>
                 </div>
                 @else

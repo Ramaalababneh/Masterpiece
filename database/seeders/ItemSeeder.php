@@ -16,6 +16,7 @@ class ItemSeeder extends Seeder
 public function run()
     {
         $items = [
+            // shirts seeder
             [
                 'name' => 'Black Shirt',
                 'image' => 'http://127.0.0.1:8000/assets/img/1698591035.png',
@@ -125,7 +126,18 @@ public function run()
                 'size' => 'free size',
                 'category_id' => 1, 
             ],
-            
+            // shirts seeder end
+
+            // scrub seeder
+            [
+                'name' => 'Black Scrub',
+                'image' => 'assets/images/img/scrubs/scrub1.jpg',                
+                'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
+                'price' => '35',
+                'stock_quantity' => 75,
+                'size' => 'free size',
+                'category_id' => 3,
+            ],
         ];
 
         foreach ($items as $itemData) {
