@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Cart;
@@ -8,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\OrderItem;
 use App\Models\Payment;
+
 namespace App\Http\Controllers;
 
 // use App\Http\Controllers\CartController;
@@ -28,186 +30,167 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        // $usercart = Cart::where('user_id',Auth::id())->with('item')->get();
+        $cartData = session()->get('cart', []);
 
-        // if (Auth::id()) {
-            $cartData = session()->get('cart', []);
-
-            if(Auth::id())
-            {
+        if (Auth::id()) {
             $cart = Session::get('cart', []);
             $user = Auth::id();
             if (isset($cart)) {
                 foreach ($cart as $item) {
-                Cart::create(['user_id'=>$user,
-                'item_id'=>$item['item_id'],
-                'item_price'=>$item['price'],
-                'image'=>$item['image'],
-                'quantity'=>$item['quantity'],
-                'total'=>$item['quantity'] * $item['price'],
-                ]);
+                    Cart::create([
+                        'user_id' => $user,
+                        'item_id' => $item['item_id'],
+                        'item_price' => $item['price'],
+                        'image' => $item['image'],
+                        'quantity' => $item['quantity'],
+                        'total' => $item['quantity'] * $item['price'],
+                    ]);
+                }
+                session()->forget('cart');
+                $cartDB = Cart::where('user_id', Auth::id())->with('items')->get();
+                return view('website.pages.cart.index', compact('cartDB'));
+            } else {
+                $cartDB = Cart::where('user_id', Auth::id())->with('items')->get();
+                return view('website.pages.cart.index', compact('cartDB'));
+            }
+        } else {
+            return view('website.pages.cart.index');
+
         }
-        session()->forget('cart');
-        $cartDB = Cart::where('user_id',Auth::id())->with('items')->get();
-        return view('website.pages.cart.index',compact('cartDB'));
-    }
-        else
-        {
-        $cartDB = Cart::where('user_id',Auth::id())->with('items')->get();
-        return view('website.pages.cart.index',compact('cartDB'));
-        }
-    }
-    else{
-        return view('website.pages.cart.index');
-
-    }
-        //     foreach ($cartData as $cartItem) {
-        //         Cart::create([
-        //             'user_id' => Auth::id(),
-        //             'item_id' => $cartItem['item_id'],
-        //             'quantity' => $cartItem['quantity'],
-        //             'item_price' => $cartItem['item_price'],
-        //             'total' => $cartItem['item_price'] * $cartItem['quantity']
-        //         ]);
-        //     }
-        //     $cartcount = Cart::where('user_id', Auth::id())->count();
-        //     session(['cartCount' => $cartcount]);
-
-        //     session()->forget('cart');
-
-        //     $cart = Cart::where('user_id', Auth::id())->first();
-
-        //     // if ($cart) {
-        //         return view('website.pages.cart.index', compact('usercart'))->with('reload', true);
-        //     // } else {
-        //         // return view('cart.cart', compact('usercart'));
-        //     // }
-        // } else
-           // dd($cartData);
-            
-
     }
     public function create(Request $request)
     {
 
-        // $cart = Cart::where('user_id', Auth::id())->with('item')->get();
-        // $totalPrice = $cart->sum('total');
-        // $request->validate([
-        //     'name' => 'required|string',
-        //     'location' => 'required',
-        //     'email' => 'required|email',
-        //     'mobileNum	' => 'required',
-        //     'regex:/^(079|078|077)\d{7}$/|max:10',
-        // ]);
-        // $payment = Payment::create([
-        //     'method' => $request->payment,
-        //     'user_id' => Auth::id(),
-        // ]);
+        $cart = Cart::where('user_id', Auth::id())->with('items')->get();
+        $totalPrice = $cart->sum('total');
 
-        //$order = Order::create([
-            // 'name' => $request->name,
-            // 'email' => $request->email,
-            // 'address' => $request->address,
-            // 'phone' => $request->phone,
-            // 'total_amount' => $totalPrice,
-            // 'payment_id' => $payment->id,
-            // 'user_id' => Auth::id(),
+        $request->validate([
+            'name' => 'required|string',
+            'location' => 'required',
+            'email' => 'required|email',
+            'mobileNum' => 'required',
+        ]);
+        if ($request->payment == 'cash') {
+            $payment = Payment::create([
+                'method' => $request->payment,
+                'user_id' => Auth::id(),
+            ]);
 
-    //     ]);
-    //     foreach($cart as $item){
-    //     OrderDetails::create([
-    //         'order_id' => $order->id,
-    //         'user_id' => Auth::id(),
-    //         'item_id'=>$item->item_id,
-    //         'item_price'=>$item->price,
-    //         'quantity'=>$item->quantity,
 
-    //     ]);
-    // }
-    // if (Auth::id()) {
-    //     Cart::where('user_id', Auth::id())->delete();
-    //     session()->forget('cartCount');
-    //     return redirect('/thankyou');
-    // }
+            $order = Order::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->location,
+                'phone' => $request->mobileNum,
+                'total_amount' => $totalPrice,
+                'payment_id' => $payment->id,
+                'user_id' => Auth::id(),
+            ]);
+            foreach ($cart as $item) {
+                OrderDetails::create([
+                    'order_id' => $order->id,
+                    'user_id' => Auth::id(),
+                    'item_id' => $item->item_id,
+                    'price' => $item->item_price,
+                    'quantity' => $item->quantity,
+
+                ]);
+
+            }
+
+            if (Auth::id()) {
+                Cart::where('user_id', Auth::id())->delete();
+                session()->forget('cartCount');
+                return redirect('/thankyou');
+            }
+        }
+        //  else {
+
+        //     $paymentRequest = [
+        //         'name' => $request->name,
+        //         'email' => $request->email,
+        //         'location' => $request->location,
+        //         'mobileNum' => $request->mobileNum,
+        //         'payment' =>  $request->payment,      
+        //     ];
+        //     session(['paymentRequest' => $paymentRequest]);
+        //     return redirect()->route('stripe');
+
+        // }
     }
     public function destroyCart()
     {
-    
+
 
     }
 
     public function store($id)
     {
-        $item=Item::find($id);
-        if(!Auth::id()){ 
-        // Retrieve the existing cart from the session or create an empty cart if it doesn't exist
-        $cart = Session::get('cart', []);
+        $item = Item::find($id);
+        if (!Auth::id()) {
+            $cart = Session::get('cart', []);
 
-if (isset($cart[$id])) {
-    // Item already exists in the cart, increase its quantity
-    $cart[$id]['quantity']++;
-} else {
-    // Item doesn't exist in the cart, add it
-    $cart[$id] = [
-        'name' => $item->name,
-        'quantity' => 1,
-        'price' => $item->price,
-        'image' => $item->image,
-        'item_id' => $item->id
-    ];
-}
-
-// Store the updated cart back in the session
-Session::put('cart', $cart);
-
-// Redirect back to the previous page
-return redirect()->back();
-        }
-        else if(Auth::id()){
-           $cart = Session::get('cart', []);  
-           if($cart){
-            $user = Auth::id();
             if (isset($cart[$id])) {
-                foreach ($cart as $item) {
-                Cart::create(['user_id'=>$user,
-                'item_id'=>$item['item_id'],
-                'item_price'=>$item['price'],
-                'image'=>$item['image'],
-                'quantity'=>$item['quantity'],
-                'total'=>$item['quantity'] * $item['price'],
-                ]);
-        }
-        session()->forget('cart');
-        }
-   
-    }
-    else{
-    $item = Item::find($id);
-    $cart= Cart::where('item_id', $id)->first();
-    if(!$cart){
-    Cart::create([
-    'user_id' => Auth::id(),
-    'item_id' => $id,
-    'item_price' => $item->price, // Use -> to access object properties
-    'image' => $item->image, // Use -> to access object properties
-    'quantity' => 1, // Use -> to access object properties
-    'total' =>  $item->price, // Use -> to access object properties
-]);}
-else
-{
-  $cart->update([
-        'quantity' => $cart->quantity + 1,
-        'total'=> $cart->quantity * $item->price
-    ]);
-} 
+                // Item already exists in the cart, increase its quantity
+                $cart[$id]['quantity']++;
+            } else {
 
-    }
-    }
+                $cart[$id] = [
+                    'name' => $item->name,
+                    'quantity' => 1,
+                    'price' => $item->price,
+                    'image' => $item->image,
+                    'item_id' => $item->id
+                ];
+            }
+
+            // Store the updated cart back in the session
+            Session::put('cart', $cart);
+
+            // Redirect back to the previous page
+            return redirect()->back();
+        } else if (Auth::id()) {
+            $cart = Session::get('cart', []);
+            if ($cart) {
+                $user = Auth::id();
+                if (isset($cart[$id])) {
+                    foreach ($cart as $item) {
+                        Cart::create([
+                            'user_id' => $user,
+                            'item_id' => $item['item_id'],
+                            'item_price' => $item['price'],
+                            'image' => $item['image'],
+                            'quantity' => $item['quantity'],
+                            'total' => $item['quantity'] * $item['price'],
+                        ]);
+                    }
+                    session()->forget('cart');
+                }
+
+            } else {
+                $item = Item::find($id);
+                $cart = Cart::where('item_id', $id)->first();
+                if (!$cart) {
+                    Cart::create([
+                        'user_id' => Auth::id(),
+                        'item_id' => $id,
+                        'item_price' => $item->price, // Use -> to access object properties
+                        'image' => $item->image, // Use -> to access object properties
+                        'quantity' => 1, // Use -> to access object properties
+                        'total' => $item->price, // Use -> to access object properties
+                    ]);
+                } else {
+                    $cart->update([
+                        'quantity' => $cart->quantity + 1,
+                        'total' => $cart->quantity * $item->price
+                    ]);
+                }
+
+            }
+        }
         // $item = Item::findOrFail($id);
         // if (!Auth::id()) {
         //     $cart = session()->get('cart', []);
@@ -224,7 +207,7 @@ else
         //     }
         //     session()->put('cart', $cart);
 
-           // Alert::success('Product has been added to cart!')->autoClose();
+        // Alert::success('Product has been added to cart!')->autoClose();
         //     $currentUrl = request()->fullUrl();
         //     session(['current_url' => $currentUrl]);
         //     echo session('current_url');
@@ -261,7 +244,7 @@ else
 
         //     }
         // }
-         return redirect()->back();
+        return redirect()->back();
     }
     public function quantitycart($id, $type)
     {
@@ -280,7 +263,7 @@ else
                 $item_price = $cart->price;
                 $newTotalPrice = $item_price * $newQuantity;
                 Cart::where(['id' => $id])->where('user_id', Auth::id())->update(
-                    ['Totalprice' => $newTotalPrice]
+                    ['total' => $newTotalPrice]
                 );
                 $cart->save();
                 return redirect()->back();
@@ -303,7 +286,7 @@ else
                 $item_price = $cart->price;
                 $newTotalPrice = $item_price * $newQuantity;
                 Cart::where(['id' => $id])->update(
-                    ['Totalprice' => $newTotalPrice]
+                    ['total' => $newTotalPrice]
                 );
                 $cart->save();
                 return redirect()->back();
@@ -333,14 +316,10 @@ else
     {
         if (Auth::id()) {
             $user = User::find(Auth::id());
-            $cart = Cart::where('user_id', Auth::id())->with('item')->get();
-            return view('cart.checkout', compact('user', 'cart'));
-        } else {
-            session()->put('checkout', 'check');
-           // Alert::error('You must login first!')->autoClose()->footer('<a href="' . route("register") . '">Sign in here ?</a>');
-            return redirect()->back();
-        }
+            $cart = Cart::where('user_id', Auth::id())->with('items')->get();
 
+            return view('website.pages.cart.checkout', compact('user', 'cart'));
+        }
     }
 
 
@@ -358,4 +337,4 @@ else
             return redirect()->back();
         }
     }
-} 
+}

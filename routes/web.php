@@ -98,10 +98,10 @@ Route::get('items/{itemId}/related', 'ItemController@showRelatedItems')->name('i
 
 // ======================= Cart routes 
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('addtocart');
-Route::post('/quantitycart/{id}/{type}', [CartController::class, 'quantitycart'])->name('quantitycart');
+Route::get('/quantitycart/{id}/{type}', [CartController::class, 'quantitycart'])->name('quantitycart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/deletecart/{item}', [CartController::class, 'destroy'])->name('deletecart');
-Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout');
+Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout')->middleware(['auth', 'verified']);
 Route::post('/checkoutcreate', [CartController::class, 'create'])->middleware(['auth', 'verified'])->name('checkoutcreate');
 
 // ======================= End Cart routes 
@@ -114,5 +114,21 @@ Route::get('/contact', function () {
     return view('website.pages.contact.index');
 });
 
+Route::get('/thankyou', function () {
+    return view('website.pages.thankyou.index');
+});
 
 require __DIR__.'/auth.php';
+
+
+
+
+//adminlogin
+Route::get('/adminLogin', [adminLoginController::class, 'adminLogin'])->name('adminLogin');
+Route::post('/adminLoginPost', [adminLoginController::class, 'adminLoginPost'])->name('adminLogin');
+Route::get('/homeAdmin', [AdminController::class, 'index'])->name('homeAdmin'); 
+// ->middleware('isLogedin');
+//adminLogout
+Route::get('/adminLogout', [adminLoginController::class, 'adminLogout'])->name('adminLogout');
+Route::get('/dash', [adminLoginController::class, 'adminLogout']);
+

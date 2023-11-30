@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->mediumText('image');
             $table->mediumText('logo')->nullable(); // Add ->nullable()
-            $table->string('description');
+            $table->mediumText('description');
             $table->string('price');
             $table->string('stock_quantity');
             $table->string('size');      

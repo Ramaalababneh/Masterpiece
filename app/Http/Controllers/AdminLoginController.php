@@ -34,9 +34,8 @@ class AdminLoginController extends Controller
                     session()->put('loginname', $admin->name);
                     $name = session('loginname');
 
-                return redirect()->route('/resources/views/dashboard/pages/home/index.blade.php')->with('success', 'Login Successfully');
-
-                } else {
+                return redirect()->route('homeAdmin')->with('success', 'Login Successfully');
+            } else {
                     return back()->with('error', 'Email or Password is invalid');
                 }
             } else {

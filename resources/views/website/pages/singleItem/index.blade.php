@@ -39,12 +39,6 @@
                     <button class="primary-btn" style="background-color: #FDB827; margin right: 10px; width: 400px; border-color:#FDB827; text-decoration: none;">Upload your logo</button>
                     <br> <br>
                     <div class="product__details__option">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
-                        </div>
-
                         <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827; text-decoration: none;">Add to cart</a>
                         </div>
                 </div>

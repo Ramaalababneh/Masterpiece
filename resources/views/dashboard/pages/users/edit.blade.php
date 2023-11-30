@@ -21,10 +21,10 @@
                                 <input type="text" name="email" value="{{ $data->email }}" id="email" class="form-control">
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" value="{{ $data->password }}" id="password" class="form-control">
-                            </div>
+                            </div> --}}
 
                             <div class="mb-3">
                                 <label for="mobileNum">Mobile Number</label>

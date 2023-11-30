@@ -13,11 +13,13 @@ class User extends Authenticatable
     protected $table='users';
     protected $primaryKey ='id';
     protected $gaurded = [];
-     protected $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'password',
-      
+        'mobileNum',
+        'location',
+        'image',
     ];
 
 

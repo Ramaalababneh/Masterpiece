@@ -171,7 +171,7 @@ you can use the generic selector below, but it's slower:
 	content: "\4c";
 }
 .icon_close:before {
-	content: "\4d";
+	content: "\1F5D1"
 }
 .icon_check:before {
 	content: "\4e";

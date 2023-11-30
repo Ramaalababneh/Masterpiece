@@ -9,12 +9,20 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'user_id',
+        'total_amount',
+        'payment_id',
+        'phone',
+        'name',
+        'email',
+        'address',
+    ];
 
     public function order_details()
-        {
-            return $this->hasMany(OrderDetails::class);
-        }
+    {
+        return $this->hasMany(OrderDetails::class);
+    }
 
     public function reviews()
     {
