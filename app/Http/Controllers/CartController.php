@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 namespace App\Http\Controllers;
 
@@ -107,19 +108,38 @@ class CartController extends Controller
                 return redirect('/thankyou');
             }
         }
-        //  else {
+        else {
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $paypalToken = $provider->getAccessToken();
+            $response = $provider->createOrder([
+                "intent" => "CAPTURE",
+                "application_context" => [
+                        "return_url" => route('paypal_success'),
+                        "cancel_url" => route('paypal_cancel')
+                    ],
+                "purchase_units" => [
+                    [
+                        "amount" => [
+                            "currency_code" => "USD",
+                            "value" => 7
+                        ]
+                    ]
+                ]
+            ]);
 
-        //     $paymentRequest = [
-        //         'name' => $request->name,
-        //         'email' => $request->email,
-        //         'location' => $request->location,
-        //         'mobileNum' => $request->mobileNum,
-        //         'payment' =>  $request->payment,      
-        //     ];
-        //     session(['paymentRequest' => $paymentRequest]);
-        //     return redirect()->route('stripe');
 
-        // }
+            $paymentRequest = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'location' => $request->location,
+                'mobileNum' => $request->mobileNum,
+                'payment' =>  $request->payment,      
+            ];
+            session(['paymentRequest' => $paymentRequest]);
+            return redirect()->route('stripe');
+
+        }
     }
     public function destroyCart()
     {

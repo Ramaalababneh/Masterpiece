@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="product__details__img">
+                <div class="product__details__img"> 
                     <div class="product__details__big__img">
                         <img class="big_img" src="{{ $item->image }}" alt="Product Image">
                     </div>
@@ -31,15 +31,23 @@
                     <h4>{{ $item->name }}</h4>
                     <h5>{{ $item->price }} JOD</h5>
                     <p>{{ $item->description }}</p>
+
                     <ul>
                         <li>Logo: <span>Price includes the logo</span></li>
                         <li>Category: <span>{{ $item->category->name }}</span></li>
                         <li>Size: <span>{{ $item->size }}</span></li>
                     </ul>
-                    <button class="primary-btn" style="background-color: #FDB827; margin right: 10px; width: 400px; border-color:#FDB827; text-decoration: none;">Upload your logo</button>
+
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                    <label for="fileInput" style="background-color: #FDB827; color: #fff; padding: 15px 20px; border: none; border-radius: 5px; cursor: pointer; display: inline-block;">Upload Your Logo
+                        <input type="file" name="photo" id="fileInput" style="display: none;" accept="image/*">
+                    </label>
+                    </form>
+
+
                     <br> <br>
                     <div class="product__details__option">
-                        <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827; text-decoration: none;">Add to cart</a>
+                        <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827; text-decoration: none;border-radius: 5px">Add to cart</a>
                         </div>
                 </div>
                 @else
@@ -50,8 +58,6 @@
     </div>
 </section>
 
-
-            </div>
             <div class="product__details__tab">
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs" role="tablist">
