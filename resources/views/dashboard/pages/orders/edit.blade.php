@@ -11,10 +11,10 @@
                             @method("PATCH")
                             <input type="hidden" name="id" value="{{ $data->id }}" id="id">
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label>Order Date :</label>
                                 <input type="date" class="form-control" value="{{ $data->order_date}}"  id="order_date" name="order_date">                
-                            </div>
+                            </div> --}}
 
                             <div class="mb-3">
                                 <label>Total Amount :</label><br>

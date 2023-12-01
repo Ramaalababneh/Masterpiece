@@ -30,12 +30,12 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'order_date' => 'required',
+            // 'order_date' => 'required',
             'total_amount' => 'required',
             ]);
 
         Order::create([
-            'order_date' => $request->order_date,
+            // 'order_date' => $request->order_date,
             'total_amount' => $request->total_amount,
             // 'user_id' => $request->user_id,
         ]);
@@ -58,7 +58,7 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data['order_date'] = $request->order_date;
+        // $data['order_date'] = $request->order_date;
         $data['total_amount'] = $request->total_amount;
         // $data['user_id'] = $request->user_id;
 

@@ -38,7 +38,7 @@
                             </div>
 
                             @if ($errors->userDeletion->isNotEmpty())
-                                <p class="text-red-500 mt-2">{{ __('Incorrect password. Please try again.') }}</p>
+                                <p style="color: red;" class="text-red-500 mt-2">{{ __('Incorrect password. Please try again.') }}</p>
                             @endif
                         </div>
                     </div>

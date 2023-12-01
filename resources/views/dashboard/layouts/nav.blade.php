@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -30,7 +30,7 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{ asset('/homeAdmin') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -97,7 +97,7 @@
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link"  aria-expanded="false">
+              <a href="{{ asset('/review') }}" class="sidebar-link"  aria-expanded="false">
                 <span>
                   <i class="ti ti-messages"></i>
                 </span>
@@ -106,7 +106,7 @@
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./contact.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{ asset('/contact') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-message-2"></i>
                 </span>
@@ -126,21 +126,33 @@
     <div class="body-wrapper">
       <!----------------------------------------------- Header ----------------------------------------------->
       <header class="app-header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <ul class="navbar-nav">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fff; padding: 10px;">
+
+        <!-- Toggle button for small screens -->
+        <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                <i class="ti ti-menu-2"></i>
-              </a>
+                <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                    <i class="ti ti-menu-2"></i>
+                </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
-                <div class="notification bg-danger rounded-circle"></div>
-              </a>
-            </li>
-          </ul>
-          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+        </ul>
+
+        <!-- "Log out" button aligned to the right -->
+        <div style="margin-left: auto;">
+            @if (session('loginname'))
+                <a href="{{ route('adminLogout') }}">
+                    <button type="submit" class="btn btn-warning" style="width: 150px;">Log out</button>
+                </a>
+            @endif
+        </div>
+
+    </nav>
+</header>
+
+
+
+      
+          {{-- <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
@@ -158,6 +170,4 @@
                 </div>
               </li>
             </ul>
-          </div>
-        </nav>
-      </header>
+          </div> --}}

@@ -8,7 +8,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Order Date</th>
+                                {{-- <th scope="col">Order Date</th> --}}
                                 <th scope="col">Total Amount</th>
                                 <th scope="col">User ID</th> 
                                 <th scope="col">Action</th>                               
@@ -18,7 +18,7 @@
                         <tbody>
                     @foreach ( $data as $item )
                     <tr>
-                    <td>{{ $item->order_date }}</td>                    
+                    {{-- <td>{{ $item->order_date }}</td>                     --}}
                     <td>{{ $item->total_amount }}</td>
                     <td>{{ $item->user_id }}</td>
                     <td>

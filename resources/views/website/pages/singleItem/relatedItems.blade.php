@@ -12,9 +12,10 @@
             <div class="row">
             <div class="related__products__slider owl-carousel">
             @foreach ($relatedItems as $relatedItem)
-            <div class="col-lg-3">
+            <div class="col-lg-12">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="{{ asset($relatedItem->image) }}">
+
                         <div class="product__label">
                             <span>{{ $relatedItem->category->name }}</span>
                         </div>

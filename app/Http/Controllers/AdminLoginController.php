@@ -51,5 +51,12 @@ class AdminLoginController extends Controller
             return redirect('adminLogin');
         }
     }
+
+    public function adminHome()
+    {
+        return view('dashboard.pages.home.index');
+
+
+    }
 }
 

@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -12,17 +11,6 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,65 +26,41 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// _____________________
+// _________Dashboard____________
+// ______________adminlogin
+Route::get('/adminLogin', [adminLoginController::class, 'adminLogin'])->name('adminLogin');
+Route::post('/adminLoginPost', [adminLoginController::class, 'adminLoginPost'])->name('adminLogin');
+Route::get('/homeAdmin', [AdminLoginController::class, 'adminHome'])->name('homeAdmin')->middleware('isLogedin');
+// ______________adminLogout
+Route::get('/adminLogout', [adminLoginController::class, 'adminLogout'])->name('adminLogout');
+Route::get('/dash', [adminLoginController::class, 'adminLogout']);
+// ______________admin Dashboard CRUDS routes
+Route::resource('/category', CategoryController::class)->middleware('isLogedin');
 
-// Route::get('/', function () {
-//     return view('dashboard.pages.category.index');
-// });
+Route::resource('/admin'   , AdminController::class)->middleware('isLogedin');
 
-// Route::get('/', function () {
-//     return view('dashboard.pages.category.index');
-// });
+Route::resource('/user'   , UserController::class)->middleware('isLogedin');
 
-// Dashboard routes
-Route::resource('/category', CategoryController::class);
+Route::resource('/discount'   , DiscountController::class)->middleware('isLogedin');
 
-Route::resource('/admin'   , AdminController::class);
+Route::resource('/item'   , ItemController::class)->middleware('isLogedin');
 
-Route::resource('/user'   , UserController::class);
+Route::resource('/order'   , OrderController::class)->middleware('isLogedin');
 
-Route::resource('/discount'   , DiscountController::class);
+Route::resource('/review'   , ReviewController::class)->middleware('isLogedin');
+// _________Dashboard END____________
 
-Route::resource('/item'   , ItemController::class);
+//+++++++++++++++++++++++++++++++++++
 
-Route::resource('/order'   , OrderController::class);
-
-Route::resource('/review'   , ReviewController::class);
-
-//Route::get('/review', 'ReviewController@index');
-
-
-
-// //adminlogin
-// Route::get('/user', [UserController::class, 'index']);
-// Route::post('/adminLoginPost', [AdminLoginController::class, 'adminLoginPost'])->name('adminLogin');
-// Route::get('/homeAdmin',[CountController::class, 'index'])->name('homeAdmin')->middleware('isLogedin');
-
-//adminLogout
-
-// Route::get('/adminLogout', [AdminLoginController::class, 'adminLogout'])->name('adminLogout');
-// Route::get('/dash', [AdminLoginController::class, 'adminLogout']);
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard.pages.users.index');
-// });
-
-
-
-// Route::get('/', function () {
-//     return view('website.pages.home.index');
-// });
-
+// ===========WEBSITE==========
+// ______________Category & Item start
 route::get('/', [CategoryController::class,'show'])->name('home');
 route::get('/categoryHome/{id}', [CategoryController::class,'showItemsByCategory'])->name('category');
-// Route::get('/category/{id}', 'CategoryController@showItemsByCategory')->name('category.items');
-//Route::get('/item/{category_id}', 'ItemController@showSingleItem');
-//Route::get('/item/{category_id}', 'ItemController@showSingleItem')->name('single-item');
 Route::get('/item/{id}/{category_id}', [ItemController::class,'show'])->name('single-item');
-
 Route::get('items/{itemId}/related', 'ItemController@showRelatedItems')->name('items.showRelatedItems');
+// ______________Category & Item end
 
-// ======================= Cart routes 
+// ______________Cart routes 
 Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('addtocart');
 Route::get('/quantitycart/{id}/{type}', [CartController::class, 'quantitycart'])->name('quantitycart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
@@ -105,9 +69,9 @@ Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout')->
 Route::post('/checkoutcreate', [CartController::class, 'create'])->middleware(['auth', 'verified'])->name('checkoutcreate');
 Route::get('paypal/success', [CartController::class, 'success'])->name('paypal_success');
 Route::get('paypal/cancel', [CartController::class, 'cancel'])->name('paypal_cancel');
+//_______________End Cart routes 
 
-// ======================= End Cart routes 
-
+//_______________Static Pages start
 Route::get('/about', function () {
     return view('website.pages.about.index');
 });
@@ -119,18 +83,7 @@ Route::get('/contact', function () {
 Route::get('/thankyou', function () {
     return view('website.pages.thankyou.index');
 })->name('thankyou');
-
+//_________________Static Pages end
 require __DIR__.'/auth.php';
 
-
-
-
-//adminlogin
-Route::get('/adminLogin', [adminLoginController::class, 'adminLogin'])->name('adminLogin');
-Route::post('/adminLoginPost', [adminLoginController::class, 'adminLoginPost'])->name('adminLogin');
-Route::get('/homeAdmin', [AdminController::class, 'index'])->name('homeAdmin'); 
-// ->middleware('isLogedin');
-//adminLogout
-Route::get('/adminLogout', [adminLoginController::class, 'adminLogout'])->name('adminLogout');
-Route::get('/dash', [adminLoginController::class, 'adminLogout']);
 
