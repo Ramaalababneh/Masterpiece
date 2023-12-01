@@ -1,64 +1,51 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+<section class="ftco-section ftco-cart">
+    <form enctype="multipart/form-data" method="post" action="{{ route('profile.update') }}">
         @csrf
         @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
+		<div class="container rounded">
+            <div class="row">
+                <div class="col-lg-4 col-md-3">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="300px" src="{{ asset(Auth::user()->image) }}">
+                    </div>
                 </div>
-            @endif
+                <div class="col-lg-8 col-md-5">
+                    <div class="p-3 py-5"><br><br>
+                        <div class="row mt-2">
+                            <div class="col-md-6"><label class="labels">Name</label><input  name="name" type="text" class="form-control" placeholder="first name" value="{{ Auth::user()->name }}"></div>
+                            <br>
+                        </div>
+
+                        <div class="row mt-3"> 
+                            <div class="col-md-12"><label class="labels">Mobile Number</label><input name="phone" type="tel" class="form-control" placeholder="enter phone number" value="{{ Auth::user()->mobileNum }}"></div>
+                            <div class="col-md-12"><label class="labels">Email</label><input name="email" type="email" class="form-control" placeholder="enter email id" value="{{ Auth::user()->email }}"></div>
+                        </div>
+                        <br><br>
+                        
+                        <center>
+                            <div>
+                                {{-- <p class="col-lg-4 text-center"><a href="#" class="btn btn-warning py-3 px-4">Save Profile</a></p> --}}
+                                <button class="col-lg-4 text-center btn btn-warning py-3 px-4" type="submit">Save Profile</button>
+                                <br>
+                                <br>
+                                {{-- <input type="file" id="upload" class="account-file-input col-lg-4 text-center btn btn-warning py-3 px-4" name="image" accept="image/png, image/jpeg" /> --}}
+                                <label for="upload" class="btn btn-warning py-3 px-4" style="position: relative; overflow: hidden; display: inline-block;">
+                                <span>Select Image</span>
+                                <input type="file" id="upload" class="account-file-input" name="image" accept="image/png, image/jpeg" style="position: absolute; font-size: 100px; opacity: 0; right: 0; top: 0;" />
+                            </label>
+                            </div> 
+                        </center>
+
+                        @if (session('status') === 'profile-updated')
+                            <?php
+                            Alert::success('Success', 'Your information is updated successfully!');
+                            ?>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
+        </div>
         </div>
     </form>
-</section>
+    </section>

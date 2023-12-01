@@ -23,6 +23,8 @@
                 {{-- <img src="{{ asset('website/img/icon/login.png') }}"> --}}
                 Login</a></li>
             @endif
+
+            <li><a href="{{ route('profile.edit') }}">profile</a> </li>
         </ul>
     </div>
 </div>
@@ -53,7 +55,9 @@
                                 src="{{ asset('website/img/icon/cart.png') }}" alt="cart icon"></a>
                             </div>
                             </div>
-                        <ul style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center;">
+                            <ul style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center;">
+                            <li><a style="text-decoration: none; color: #FDB827;" href="{{ route('profile.edit') }}">profile</a> </li>
+
                             @if (Auth::check())
                                 <li><a href="{{ route('logout') }}" style="color: black; text-decoration: none; padding: 10px;">Logout</a></li>
                                 <li style="color: #FDB827; font-weight: bold; margin-left:5px;">Welcome, {{ Auth::user()->name }}!</li>
@@ -62,6 +66,9 @@
                                     {{-- <img src="{{ asset('website/img/icon/login.png') }}"> --}}
                                     Login</a></li>
                             @endif
+
+                            {{-- <li><a href="{{ route('profile.edit') }}">profile</a> </li> --}}
+
                         </ul>
                     </div>
                 </div>

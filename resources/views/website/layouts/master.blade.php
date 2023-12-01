@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/owl.carousel.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('website/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('website/css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -36,7 +37,7 @@
     <!-- Page Preloder -->
     
     
-
+@include('sweetalert::alert')
 @include('website.layouts.nav')
 @yield('content')
 @include('website.layouts.footer')

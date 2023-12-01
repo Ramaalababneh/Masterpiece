@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Cart;
@@ -10,21 +9,8 @@ use App\Models\OrderDetails;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
-
-namespace App\Http\Controllers;
-
-// use App\Http\Controllers\CartController;
-
-use App\Models\Cart;
-use App\Models\Item;
-use App\Models\Order;
-use App\Models\OrderDetails;
-use App\Models\Payment;
 use App\Models\User;
-// use Auth;
-//use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -109,6 +95,12 @@ class CartController extends Controller
             }
         }
         else {
+            if ($request->payment == 'paypal') {
+            $payment = Payment::create([
+                'method' => $request->payment,
+                'user_id' => Auth::id(),
+            ]);
+            // dd($payment->id);
             $provider = new PayPalClient;
             $provider->setApiCredentials(config('paypal'));
             $paypalToken = $provider->getAccessToken();
@@ -122,25 +114,88 @@ class CartController extends Controller
                     [
                         "amount" => [
                             "currency_code" => "USD",
-                            "value" => 7
+                            "value" => $totalPrice 
                         ]
                     ]
                 ]
             ]);
 
+            if (isset($response['id']) && $response['id'] != null) {
+                foreach ($response['links'] as $link) {
+                    if ($link['rel'] === 'approve') {
+                        // Store specific data from the request in the session
+                        session([
+                            'paymentDetail' => [
+                                'name' => $request->input('name'),
+                                'email' => $request->input('email'),
+                                'location' => $request->input('location'),
+                                'phone' => $request->input('mobileNum'),
+                                'payment' => $payment->id,
+                                'totalPrice' =>$totalPrice,
+                            ]
+                        ]);
+                        // dd(session('paymentDetail'));
+                        return redirect()->away($link['href']);
+                    }
+                }
+            } else {
+                return redirect()->route('paypal_cancel');
+            }
 
-            $paymentRequest = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'location' => $request->location,
-                'mobileNum' => $request->mobileNum,
-                'payment' =>  $request->payment,      
-            ];
-            session(['paymentRequest' => $paymentRequest]);
-            return redirect()->route('stripe');
+
+            // $paymentRequest = [
+            //     'name' => $request->name,
+            //     'email' => $request->email,
+            //     'location' => $request->location,
+            //     'mobileNum' => $request->mobileNum,
+            //     'payment' =>  $request->payment,      
+            // ];
+            // session(['paymentRequest' => $paymentRequest]);
+            // return redirect()->route('stripe');
 
         }
     }
+}
+    public function success(Request $request)
+    {
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request->token);
+
+        // dd($response);
+
+
+        if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            $payment = session('paymentDetail');
+
+            $user = Auth::user();
+            // dd($payment);
+            // Create a new reservation
+            $order = new Order();
+            $order->user_id = $user->id;
+            $order->phone = $payment['phone'];
+            $order->name = $payment['name'];
+            $order->email = $payment['email'];
+            $order->address = $payment['location'];
+            $order->payment_id = $payment['payment'];
+            $order->total_amount = $payment['totalPrice'];
+
+            $order->save();
+            // dd('lena');
+            Alert::success('Success', 'Your Order is confirmed!');
+            return redirect()->route('thankyou');
+            // return redirect()->route('index');
+        } else {
+            return redirect()->route('paypal_cancel');
+        }
+    }
+
+    public function cancel()
+    {
+        return redirect()->route('home')->with('error', 'Payment is cancelled!');
+    }
+
     public function destroyCart()
     {
 

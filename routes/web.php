@@ -103,6 +103,8 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/deletecart/{item}', [CartController::class, 'destroy'])->name('deletecart');
 Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout')->middleware(['auth', 'verified']);
 Route::post('/checkoutcreate', [CartController::class, 'create'])->middleware(['auth', 'verified'])->name('checkoutcreate');
+Route::get('paypal/success', [CartController::class, 'success'])->name('paypal_success');
+Route::get('paypal/cancel', [CartController::class, 'cancel'])->name('paypal_cancel');
 
 // ======================= End Cart routes 
 
@@ -116,7 +118,7 @@ Route::get('/contact', function () {
 
 Route::get('/thankyou', function () {
     return view('website.pages.thankyou.index');
-});
+})->name('thankyou');
 
 require __DIR__.'/auth.php';
 
