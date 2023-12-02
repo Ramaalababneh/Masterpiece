@@ -139,7 +139,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Navy Blue Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub2.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -148,7 +148,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Grey Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub3.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -157,7 +157,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Petroleum Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub4.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -166,7 +166,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Olive Green Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub5.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -175,7 +175,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'turquaz Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub6.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -184,7 +184,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Teal Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub7.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -193,7 +193,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Baby Blue Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub8.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -202,7 +202,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Light Purple Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub9.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -211,7 +211,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Pink Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub10.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -220,7 +220,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Dark Purple Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub11.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',
@@ -229,7 +229,7 @@ public function run()
                 'category_id' => 3,
             ],
             [
-                'name' => 'Black Scrub',
+                'name' => 'Betalains Scrub',
                 'image' => 'http://127.0.0.1:8000/assets/images/img/scrubs/scrub12.jpg',
                 'description' => 'Our scrubs are meticulously crafted from high-quality, breathable fabric, offering a comfortable and durable solution for healthcare professionals. Made to withstand the demands of a fast-paced work environment, these scrubs provide a perfect blend of functionality and style. With a unisex design and a range of sizes, our scrubs ensure a comfortable fit for healthcare workers of all shapes and sizes, allowing them to focus on what matters most – providing excellent care.',
                 'price' => '35',

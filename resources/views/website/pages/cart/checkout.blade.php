@@ -72,11 +72,10 @@
                                 </ul>
                                 <ul class="checkout_total_all">
                                     <li>Subtotal <span>{{ $total }}JOD</span></li>
+                                    <li><span>enjoy free deleviry!</span></li>
                                     <li>Total <span>{{ $total }}JOD</span></li>
                                 </ul>
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
-
-
                             </div>
                         </div>
                     </div>

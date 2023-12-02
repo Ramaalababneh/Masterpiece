@@ -69,7 +69,11 @@
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-lg-8">
-                                    <p>comfortable unisex t-shirt, the perfect blend of style and relaxation. Crafted from premium 100% cotton, this t-shirt ensures breathability and a soft touch against your skin. Its versatile design features a timeless crew neck and short sleeves,</p>
+                                    <p>
+                                        premium comfortable unisex work uniform with breathable fabrics Crafted from premium 100% cotton and a soft touch against your skin, ideal for extended hours.
+                                        <br>
+                                        The high-quality logo, seamlessly sewn on the top right, adds a touch of sophistication. Elevate your workwear with style and durability in every detail
+                                    </p>
                                 </div>
                             </div>
                         </div>
