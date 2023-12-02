@@ -23,8 +23,9 @@
                 {{-- <img src="{{ asset('website/img/icon/login.png') }}"> --}}
                 Login</a></li>
             @endif
-
             <li><a href="{{ route('profile.edit') }}">profile</a> </li>
+
+
         </ul>
     </div>
 </div>
@@ -45,24 +46,28 @@
                         </center>
                         <div class="header__top__right">
                             <div class="header__top__right__links">
-                                <a href="#" class="search-switch"><img
-                                        src="{{ asset('website/img/icon/search.png') }}" alt=""></a>
+                                {{-- <a href="#" class="search-switch"><img
+                                        src="{{ asset('website/img/icon/search.png') }}" alt=""></a> --}}
                                 <a href="{{ url('/wisslist.html') }}"><img
                                         src="{{ asset('website/images/img/icon/heart.png') }}" alt=""></a>
+                                @if (Auth::check())
+                                <a style="text-decoration: none; color: #FDB827;" href="{{ route('profile.edit') }}">profile</a>
+                                @endif
                             </div>
+                            
                             <div class="header__top__right__cart">
                                 <a href="{{ url('/cart') }}"><img
                                 src="{{ asset('website/img/icon/cart.png') }}" alt="cart icon"></a>
                             </div>
+
                             </div>
                             <ul style="list-style: none; margin: 0; padding: 0; display: flex; align-items: center;">
-                            <li><a style="text-decoration: none; color: #FDB827;" href="{{ route('profile.edit') }}">profile</a> </li>
-
+                            
                             @if (Auth::check())
-                                <li><a href="{{ route('logout') }}" style="color: black; text-decoration: none; padding: 10px;">Logout</a></li>
-                                <li style="color: #FDB827; font-weight: bold; margin-left:5px;">Welcome, {{ Auth::user()->name }}!</li>
+                                <li><a href="{{ route('logout') }}" style="color: #FDB827; text-decoration: none; padding: 10px;">Logout</a></li>
+                                <li style="color:Black; font-weight: bold; margin-left:5px;">Welcome, {{ Auth::user()->name }}!</li>
                             @else
-                                <li><a href="{{ route('login') }}" style="color: black; text-decoration: none; padding: 40px;">
+                                <li><a href="{{ route('login') }}" style="color: #FDB827; text-decoration: none; padding: 40px;">
                                     {{-- <img src="{{ asset('website/img/icon/login.png') }}"> --}}
                                     Login</a></li>
                             @endif
