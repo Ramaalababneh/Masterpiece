@@ -27,7 +27,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (!session()->has('cartPageReloaded') && session()->has('checkout')) {
+            session(['cartPageReloaded' => true]);
+            return redirect()->route('cart');
+        }
+        else{
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        
     }
 
     /**

@@ -65,7 +65,8 @@ Route::get('/addtocart/{id}', [CartController::class, 'store'])->name('addtocart
 Route::get('/quantitycart/{id}/{type}', [CartController::class, 'quantitycart'])->name('quantitycart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/deletecart/{item}', [CartController::class, 'destroy'])->name('deletecart');
-Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout')->middleware(['auth', 'verified']);
+Route::get('/checkout', [CartController::class, 'Checkout'])->name('checkout');
+// ->middleware(['auth', 'verified'])
 Route::post('/checkoutcreate', [CartController::class, 'create'])->middleware(['auth', 'verified'])->name('checkoutcreate');
 Route::get('paypal/success', [CartController::class, 'success'])->name('paypal_success');
 Route::get('paypal/cancel', [CartController::class, 'cancel'])->name('paypal_cancel');

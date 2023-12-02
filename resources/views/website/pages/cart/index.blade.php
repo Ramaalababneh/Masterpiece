@@ -428,7 +428,7 @@
                                     </div>
                                     </td>
 
-                                    <td class="cart__price"><center>{{ $cartItem->total }} JOD</center></td>
+                                    <td class="cart__price"><center>{{ $cartItem->item_price * $cartItem->quantity }} JOD</center></td>
                                     <td class="cart__close">
                                         <a href="{{ route('deletecart', ['item' => $cartItem->id]) }}">
                                             <span class="icon_close"></span>

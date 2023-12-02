@@ -335,7 +335,7 @@ class CartController extends Controller
                 $cart = Cart::where('user_id', Auth::id())->where('id', $id)->first();
                 $cart->increment('quantity');
                 $newQuantity = $cart->quantity;
-                $item_price = $cart->price;
+                $item_price = $cart->item_price;
                 $newTotalPrice = $item_price * $newQuantity;
                 Cart::where(['id' => $id])->where('user_id', Auth::id())->update(
                     ['total' => $newTotalPrice]
@@ -358,7 +358,7 @@ class CartController extends Controller
                 session()->forget('cart');
                 $cart->decrement('quantity');
                 $newQuantity = $cart->quantity;
-                $item_price = $cart->price;
+                $item_price = $cart->item_price;
                 $newTotalPrice = $item_price * $newQuantity;
                 Cart::where(['id' => $id])->update(
                     ['total' => $newTotalPrice]
@@ -394,6 +394,12 @@ class CartController extends Controller
             $cart = Cart::where('user_id', Auth::id())->with('items')->get();
 
             return view('website.pages.cart.checkout', compact('user', 'cart'));
+        }
+        else
+        {
+            session()->put('checkout', 'check');
+            return redirect()->route('login');
+
         }
     }
 
