@@ -10,7 +10,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -85,6 +85,8 @@ Route::get('/thankyou', function () {
     return view('website.pages.thankyou.index');
 })->name('thankyou');
 //_________________Static Pages end
+
+Route::resource('contact', ContactController::class);
 require __DIR__.'/auth.php';
 
 
