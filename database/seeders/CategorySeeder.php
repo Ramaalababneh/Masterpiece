@@ -24,17 +24,17 @@ class CategorySeeder extends Seeder
         Category::create([
             'name' => 'Hoddies',
             'description' => 'Our Hoodies are crafted from 100% cotton, providing a soft and comfortable feel against the skin.',
-            'image' => 'http://127.0.0.1:8000/assets/img/1698584283.png',
+            'image' => 'http://127.0.0.1:8000/assets/img/1701626460.png',
         ]);
         Category::create([
             'name' => 'Scrubs',
             'description' => 'Our Scrubs are crafted from 100% cotton, providing a soft and comfortable feel against the skin.',
-            'image' => 'http://127.0.0.1:8000/assets/img/1698584331.png',
+            'image' => 'http://127.0.0.1:8000/assets/img/1701626480.jpg',
         ]);
         Category::create([
             'name' => 'Labcoats',
             'description' => 'Our Labcoats are crafted from 100% cotton, providing a soft and comfortable feel against the skin.',
-            'image' => 'http://127.0.0.1:8000/assets/img/1698584363.jpg',
+            'image' => 'http://127.0.0.1:8000/assets/img/1701626360.webp',
         ]);
     }
 }

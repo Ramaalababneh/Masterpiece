@@ -42,15 +42,16 @@
                     <label for="fileInput" style="background-color: #FDB827; color: #fff; padding: 15px 20px; border: none; border-radius: 5px; cursor: pointer; display: inline-block;">Upload Your Logo
                         <input type="file" name="photo" id="fileInput" style="display: none;" accept="image/*">
                     </label>
-                    </form>
-
 
                     <br> <br>
                     <div class="product__details__option">
                         <a href="{{ route('addtocart', ['id' => $item->id]) }}" class="primary-btn" style="background-color: #FDB827; text-decoration: none;border-radius: 5px">Add to cart</a>
-                        </div>
+                    </div>
+                    </form>
                 </div>
+
                 @else
+
                 <p>Item not found for the selected category.</p>
                 @endif
             </div>

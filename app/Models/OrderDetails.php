@@ -9,6 +9,18 @@ class OrderDetails extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'quantity',
+        'price',
+        'logo',
+        'order_id',
+        'item_id',
+    ];
+
+
+    protected $attributes = [
+        'logo' => 'default_logo_value',  // Replace with your desired default value
+    ];
 
     public function items()
         {

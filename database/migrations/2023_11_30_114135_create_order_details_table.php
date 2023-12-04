@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('quantity');
             $table->string('price');
+            $table->mediumText('logo');
             $table->timestamps();
 
             $table->unsignedBigInteger('order_id')->nullable();

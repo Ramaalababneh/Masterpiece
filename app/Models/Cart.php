@@ -13,7 +13,13 @@ class Cart extends Model
         'item_id',
         'item_price',
         'total',
+        'logo',
         'quantity',
+    ];
+
+    // Set default values for certain fields
+    protected $attributes = [
+        'logo' => 'default_logo_value',  // Replace with your desired default value
     ];
 
     public function users()

@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
             'name' => 'Rama Alababneh',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('Admin@123'),
-            'image' => 'default_image.jpg', // You can change this to the default image path
+            'image' => 'http://127.0.0.1:8000/assets/img/1701630098.jpg', // You can change this to the default image path
             'created_at' => now(),
             'updated_at' => now(),
         ]);
